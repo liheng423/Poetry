@@ -1,0 +1,379 @@
+% !TEX encoding = UTF-8
+% !TEX program = lualatex
+
+\documentclass[a4j,12pt]{ltjtarticle}
+\usepackage[paperwidth=20cm, paperheight=15cm, margin=2cm]{geometry} 
+\usepackage{luatexja-fontspec}
+\usepackage{tocloft}
+\usepackage{graphicx}
+
+\setcounter{secnumdepth}{-1}
+
+\setmainjfont[BoldFont=KaiTi]{KaiTi}
+
+\usepackage{hyperref}
+
+\renewcommand\thefootnote{}
+
+
+%%%%%%%%%%%%%% 目錄 %%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand{\numberline}[1]{} % 移除目录中的编号
+\makeatother
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}% 为 section 添加点点
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%% 修改字體 %%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+
+% 修改 section 標題的字體大小
+\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
+\usepackage{titletoc}
+\titlecontents{section}
+[0pt]                  % 左邊距
+{\Large}               % 字體設定
+{\thecontentslabel\ }  % 條目格式
+{}                     % 項目內的標題
+{\titlerule*[1pc]{.}\contentspage} % 为 section 添加点点
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{文集}
+\author{李衡}
+
+
+\begin{document}
+	
+
+	
+	
+	
+
+	\Huge 野火文集序 \\
+		
+	\newpage
+		
+	\tableofcontents
+	
+	\newpage
+	\begin{center}
+	
+		\begin{flushleft}
+			\section{月歌} 
+		\end{flushleft}
+		
+		
+		
+		\vfill
+		\LARGE 	月圓雲襲月如缺 \par
+		 		雨陣驚荷雨忽歇 \par
+		 		大塊陷人悲喜間 \par
+		 		遣人何得求心滅 \par
+		\vspace{1cm} % 調節中央對齊
+		\vfill
+		
+		\footnotetext{大塊：況陽春召我以煙景、大塊假我以文章。大塊者，自然也。}
+	\newpage
+		\begin{flushleft}
+			\section{空山}
+		\end{flushleft}
+		
+		\vfill
+		\LARGE 	乍寒夜雨濯林空 \par
+				靉靆烟雲聞刹鐘 \par
+				尋路偶逢歸寺叟 \par
+				笑言我復行迷蹤 \par
+		\vspace{0.5cm} % 調節中央對齊
+		\vfill
+		
+		\footnotetext{其言尋寺、不如言尋心。刹鐘或可作參考、然烟雲之中，人之本心難求、恒之者更難求。時自省吾身、歸寺叟或即自己。「迷時師度、悟時自度」或言此意。}
+		
+	\newpage
+	
+		\begin{flushleft}
+			\section{老嫗} 
+		\end{flushleft}
+		
+		\vfill
+		\LARGE 	老嫗孤燈下、寒風料峭生 \par
+		忘身布衣薄、影蹣足難行 \par
+		舊樽復瘦碗、纖手纏囊盈\par
+		今夜怎果腹、剩餘糠與粳\par
+		我生無功德、腰纏仰家名\par
+		唯恨力難及、哀息且憐聲\par
+		尋完此街去、燈火髮熒熒\par
+		轉去聲俱寂、子夜已三更\par
+		\vspace{1.5cm} % 調節中央對齊
+		\vfill
+		
+		
+	\newpage
+	
+		\begin{flushleft}
+			\section{不繫舟} 
+		\end{flushleft}
+		
+		\vfill
+		\LARGE 	玉鉴纱霧遲\par
+		湖光銀漢逝 \par
+		孤舟何處系 \par
+		且願東風知 \par
+		\vspace{1.5cm} % 調節中央對齊
+		\vfill
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{歸宴中秋月} 
+	\end{flushleft}
+	
+	\vfill
+		\LARGE 	夜風料峭岷江邊\par
+		子時月明天\par
+		光影笙歌弦\par 怎教人知\par
+		孤孑皓月圓\par
+		我欲乘風上瓊樓\par
+		殘燈夜半後\par
+		世事大夢方得悟\par 風清雲淡\par
+		同天畫玉壺\par
+		\vspace{1.5cm} % 調節中央對齊
+	\vfill
+		
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{世風} 
+	\end{flushleft}
+	
+	\vfill
+	\LARGE 	致君堯舜難任身\par
+	彈冠相比意何存 \par
+	花開花落風清月 \par
+	客來客往亦行人 \par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{安順花舞} 
+	\end{flushleft}	
+	
+	
+	\vfill
+	\LARGE 	飛花落葉殘夏暮\par
+	但見乘風亂紅舞 \par
+	流水相携天邊去 \par
+	花心不住人心住 
+	\vfill
+	
+	\footnotetext{飛花落葉：佛語、謂獨覺乘之人、獨入於林中、見飛花落葉、感知世間無常之理、因而開悟。住：佛語、住相。此詩乃讀「日本文化史」偶憶去年殘夏妙景、當時難以言说、遂作一詩以志。}
+	
+	\newpage
+	\vspace{3cm}
+	\vfill
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle=270, width=0.8\textwidth]{img/anshun.png}
+		\caption{黔東南安順（自攝）}
+		\label{fig:zhenwu}
+	\end{figure}
+	\vfill
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{竹溪} 
+	\end{flushleft}	
+	
+	\vfill
+	\LARGE 	竹澗鎖春光\par
+	拂來緑玉觴 \par
+	無舟聞翠浪 \par
+	墙下搗衣娘 \par
+	\vfill
+	
+	\footnotetext{緑玉觴：水上之竹葉如流觴、又似有玉之黄緑混濁之色、稱之綠玉觴。此詩乃自錦城還鄉偶過之、雖已暮春曉夏、然天朗氣清、溪仍似有柔春之景。竹溪者嘉州之溪一也、曩者余日過之、奈何匆匆、無暇著詩歌之。今偶得興、遂作一詩以志鄉景。}
+	
+	
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{記夢} 
+	\end{flushleft}	
+	
+	\vfill
+		\LARGE 夜半幽人沐月登 \par
+		荒樓衰草遍天横 \par
+		望如落葉影飛下 \par
+		應斷恨腸却斷生 
+		\vspace{2cm} % 調節中央對齊
+	\vfill
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{咏真武山} 
+	\end{flushleft}	
+	
+	
+	\vfill
+		\LARGE 瓊樓争秀鬥奇松 \par
+		真武歸山忘紫宫 \par
+		竹椅閑言茶休盡 \par
+		人間亦在此山中 
+		\vspace{1cm} % 調節中央對齊
+	\vfill
+	
+	\footnotetext{游真武山而後覺蒼翠陰翳、宛遁入仙境、故作詩歌之。}
+	
+	\newpage
+	\vspace{3cm}
+	\vfill
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle=90, width=0.8\textwidth]{img/zhenwumnt.png}
+		\caption{宜賓真武山（自攝）}
+		\label{fig:zhenwu}
+	\end{figure}
+	\vfill
+	\newpage
+	
+	\begin{flushleft}
+		\section{别蓉} 
+	\end{flushleft}	
+	
+	\vfill
+		\LARGE 錦城何日回 \par
+		辭日粼波暉 \par
+		蓉水休傷别 \par
+		岷江偕我歸
+		\vspace{2cm} % 調節中央對齊
+	\vfill
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{如夢令} 
+	\end{flushleft}	
+	
+	
+	\vfill
+		\LARGE 新櫻枝展幾旋 \par
+		殘寒紅亂行阡 \par
+		閑獨步花路 \par
+		稀星孤月迷煙 \par
+		無眠  無眠 \par
+		伊人又奏幽弦
+		\vspace{2cm} % 調節中央對齊
+	\vfill
+	
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{獨吟} 
+	\end{flushleft}	
+	
+	\vfill
+		\LARGE 酒苦今宵盡 \par
+		夢空明日新 \par
+		閑鴉無問暮 \par
+		偷活不知春 
+		\vspace{2cm} % 調節中央對齊
+	\vfill
+	
+	\newpage
+	\vfill
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle=90, width=0.8\textwidth]{img/crow.jpg}
+		\caption{日暮閑鴉(代爾夫特)}
+		\label{fig:crow}
+	\end{figure}
+	\vfill
+	\newpage
+	
+	\begin{flushleft}
+		\section{寒秋} 
+	\end{flushleft}	
+	
+	\vfill
+		\LARGE 殘年霜降幾寒雨 \par
+		鴉雀晚昏啼亂飛 \par
+		秋盡黄花才報信 \par
+		一鄉明月亦希微 
+		\vspace{2cm} % 調節中央對齊
+	\vfill
+	\newpage
+	
+	\begin{flushleft}
+		\section{一剪梅 耶誕} 
+	\end{flushleft}	
+	
+	
+	\vfill
+	\LARGE 映月黄花散凍灘 \par
+	秋也飄殘  葉也凋殘 \par
+	華燈元彩路清閑 \par
+	燈影未闌  人影先闌 \par
+	吹雪初翻驚孤鸞 \par
+	亦似形單 亦似心單 \par
+	薄村冷夜計春還 \par
+	人宿温寒 我宿孤寒 \par
+	
+	
+	\vspace{2cm} % 調節中央對齊
+	\vfill
+	
+	\footnotetext{如題、耶誕節有感。}
+	
+	\newpage
+	
+	\begin{flushleft}
+		\section{花非花 遙夜} 
+	\end{flushleft}	
+	
+	\vfill
+	\LARGE 風驚簾    雨侵夢\par
+	老葉殘    沉潭凍\par
+	天光促促幾多時 \par
+	遥夜長長誰與共 \par
+
+	\vspace{0.5cm} % 調節中央對齊
+	\vfill
+	
+	\footnotetext{本詞受少游之如夢令 遙夜沉沉如水之啓發、荷蘭低地常作狂風、故深夜有感而發。}
+	
+	\newpage 
+	
+	
+	\begin{flushleft}
+		\section{如夢令 憶昔} 
+	\end{flushleft}	
+	
+	\vfill
+	\LARGE 泣笛閨中幾轉\par
+	薄暮閑鐘催晚\par
+	仍記與伊游\par 
+	粤水蜀山恨短 \par
+	如幻    如幻\par
+	人易星移誰算\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+	
+	
+	
+	
+	\end{center}
+	
+\end{document}
