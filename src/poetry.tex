@@ -2,61 +2,81 @@
 % !TEX program = lualatex
 
 \documentclass[a4j,12pt]{ltjtarticle}
-\usepackage[paperwidth=20cm, paperheight=15cm, margin=2cm]{geometry} 
+\usepackage[paperwidth=20cm, paperheight=15cm, margin=2cm]{geometry}
 \usepackage{luatexja-fontspec}
-\usepackage{tocloft}
+\usepackage{luatexja-ruby}
 \usepackage{graphicx}
-
-\setcounter{secnumdepth}{-1}
-
-\setmainjfont[BoldFont=KaiTi]{KaiTi}
-
-\usepackage{hyperref}
-
-\renewcommand\thefootnote{}
-
-
-%%%%%%%%%%%%%% 目錄 %%%%%%%%%%%%%%%%%%%%%
-\makeatletter
-\renewcommand{\numberline}[1]{} % 移除目录中的编号
-\makeatother
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}% 为 section 添加点点
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%% 修改字體 %%%%%%%%%%%%%%
-\usepackage[utf8]{inputenc}
-\usepackage{titlesec}
-
-% 修改 section 標題的字體大小
-\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
 \usepackage{titletoc}
-\titlecontents{section}
-[0pt]                  % 左邊距
-{\Large}               % 字體設定
-{\thecontentslabel\ }  % 條目格式
-{}                     % 項目內的標題
-{\titlerule*[1pc]{.}\contentspage} % 为 section 添加点点
+\usepackage{titlesec}
+\usepackage{zhnumber}
+\usepackage{hyperref} % 放最后
 
+\renewcommand{\contentsname}{目錄}  % 想要的标题
+\renewcommand{\figurename}{圖} 
+\renewcommand{\thefigure}{\zhnumber{\arabic{figure}}} 
+\renewcommand{\thefootnote}{\zhnumber{\arabic{footnote}}}
+
+\setmainjfont[BoldFont=STZHONGS]{STSONG}
+\newjfontfamily\kaiti{KaiTi}   % Windows 下字体名通常是 “KaiTi”
+\setcounter{secnumdepth}{-1} % 让正文不编号（不影响 ToC 分页）
+
+% 正文里的 section 样式
+\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
+
+% 頁碼
+
+
+
+% 目录里 section 项的样式（大号字、点线、页码）
+\titlecontents{section}
+  [5pt]                % 左缩进
+  {\Large}             % 字体
+  {}                   % 标签（留空 = 不显示编号）
+  {}                   % 标题前缀
+%   {\titlerule*[1pc]{.}\contentspage} % 右侧点线 + 页码
+  {\titlerule*[1pc]{}\large\kaiti\contentspage}
+
+% 脚注
+\renewcommand{\footnotesize}{\kaiti\small}
+\makeatletter
+\renewcommand{\@makefnmark}{{\kaiti\textsuperscript{\@thefnmark}}}
+\makeatother
+
+%图片
+\usepackage{caption}
+\DeclareCaptionFont{kaiti}{\kaiti}
+\captionsetup{font=kaiti}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\title{文集}
-\author{衡}
-
-
 \begin{document}
-	
+\pagenumbering{arabic}
+\renewcommand{\thepage}{{\kaiti\zhnumber{\arabic{page}}}}
+\setcounter{page}{1}
 
-	
-	
-	
+	\Huge 野火诗集序 \\
 
-	\Huge 野火文集序 \\
+	\Large
+		野火者東洋言訓也野火先生者本嘉州人
+	也及至弱冠遂就成都長宿之處嘗閑起詩
+	興尋寺涉水快意其間後徙蘭國輾轉研\ruby{縣}{\footnotemark}\footnotetext{研縣者、通語呼台夫特也。然自以爲其名甚異、捨義逐音、遂自詡之研縣、取荷語鑽研之意義。}
+	營營恂恂悶悶終日憂光陰迅速欲著文字
+	又恐多忙無暇相顧遂訴諸詩賦且狀舊故
+	夫世文集浩浩宋詞唐詩著盡風雅然本集
+	不及其半分既然何爲屬文曩有唐科舉詩
+	賦取士後有宋詞盛結貴攀援然今者何也
+	蓋抒己志也乃人情流變甚於山雨傷春凄
+	秋朝喜暮悲此情一瞬縱逝不復此時縱之
+	更待何時哉夫命且蜉蝣鴻尚踏雪人何以
+	堪况凝文結字而後品誦亦似他言蓋時過
+	情遷縱景同而情异也
+
+	及此且憑此集略言我情夫詩唯志己悲喜
+	也夫句唯與己沉吟也且取樂其間悠悠無
+	縛哉時二十四年三月
+	
 		
 	\newpage
 		
@@ -182,7 +202,7 @@
 	\vfill
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[angle=270, width=0.8\textwidth]{img/anshun.png}
+		\includegraphics[angle=270, width=0.8\textwidth]{../img/anshun.png}
 		\caption{黔東南安順（自攝）}
 		\label{fig:zhenwu}
 	\end{figure}
@@ -241,7 +261,7 @@
 	\vfill
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{img/zhenwumnt.png}
+		\includegraphics[angle=90, width=0.8\textwidth]{../img/zhenwumnt.png}
 		\caption{宜賓真武山（自攝）}
 		\label{fig:zhenwu}
 	\end{figure}
@@ -296,7 +316,7 @@
 	\vfill
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{img/crow.jpg}
+		\includegraphics[angle=90, width=0.8\textwidth]{../img/crow.jpg}
 		\caption{日暮閑鴉(代爾夫特)}
 		\label{fig:crow}
 	\end{figure}
@@ -355,7 +375,84 @@
 	\footnotetext{本詞受少游之如夢令 遙夜沉沉如水之啓發、荷蘭低地常作狂風、故深夜有感而發。}
 	
 	\newpage 
+
+	\begin{flushleft}
+		\section{研縣新寺} 
+	\end{flushleft}	
+
+	\vfill
+	\LARGE 高椽秀塔暗天光\par
+	拱月攢星隽玉章\par
+	笙弄百年悲喜事\par
+	地碑忠骨遺苍凉\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
 	
+	\newpage
+
+	\begin{flushleft}
+		\section{無題} 
+	\end{flushleft}	
+
+	\vfill
+	\LARGE 挑燈案上聽寒雨\par
+	逸話閑茶送古香\par
+	西海龍王知我興\par
+	贈來夜半一分凉\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\newpage
+
+
+	\begin{flushleft}
+		\section{無題} 
+	\end{flushleft}	
+
+
+	\vfill
+	\LARGE 晚安唯兩言\par
+	語罷音塵絕\par
+	杳杳暮寒天\par
+	貓生無異別\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\newpage
+
+	\begin{flushleft}
+		\section{寡貓歌} 
+	\end{flushleft}	
+
+
+	\vfill
+	\LARGE 夕夕寡猫泣\par
+	朝朝淚遺痕\par
+	迢迢前路遠\par
+	哽哽復無言\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\newpage
+
+	\begin{flushleft}
+		\section{蘭國興廢事} 
+	\end{flushleft}	
+
+	\vfill
+	\LARGE 競彩揚燈臺攤立\par
+	古磬瓊樓人影翕\par
+	臨風持酒暮忘歸\par
+	鐘樂杳鳴催客入\par
+	蘭國興亡多少集\par
+	酒客遊童誰肯拾\par
+	殘牆疏牖屬英名\par
+	足下靈堂何者泣\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\footnotetext{蘭國者、現名荷蘭、和譯和蘭也。是日研縣趕場、蘭國古城皆中之以廣場、食肆酒家、橫次其側。其間塔刹巍峨、七寶仙境、勝須彌聖山也。信步殿内、或國之忠烈、或顯貴達官、墓碑悉數足下。嘆已為陳跡、遂予作文。}
+	\newpage
 	
 	\begin{flushleft}
 		\section{如夢令 憶昔} 
@@ -392,7 +489,7 @@
 	\vfill
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{img/tianningsi.jpeg}
+		\includegraphics[angle=90, width=0.8\textwidth]{../img/tianningsi.jpeg}
 		\caption{浙江金華天寧寺}
 		\label{fig:tianningsi}
 	\end{figure}
@@ -412,7 +509,97 @@
 	\vfill
 
 	\footnotetext{二十四年聖誕、因緣訪燈火會記、尾句未者平仄顛倒、以期更正}
+	\newpage
+	\begin{flushleft}
+		\section{記蜀夏}
+	\end{flushleft}
 	
+	\vfill
+	\LARGE 三更雷雨朝來歇\par
+
+	初曉青天紅日烈\par 
+
+	急雨襲城晏倏晴\par
+
+	幽灯人定河明滅\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\footnotetext{二十四年秋、偶憶幼時之蜀地氣象、驀然覺之竟渾然不似他國異鄉、甚殊之、遂以鄉韻偶吟小詩記之。}
+
+
+
+
+	\newpage
+	\begin{flushleft}
+		\section{望海牙暮煙有感}
+	\end{flushleft}
+	
+	\vfill
+	\LARGE 餘曛掩暮煙\par 
+		海晏萬鱗連\par 
+		眛谷欲邀酒\par 
+		來期難問年\par 
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\footnotetext{二十四年夏、同窗故友邀余以酒、遂往海牙之灘塗。適日薄、誠奇景也。然勝景依舊、酒肆猶沽、故知難再。}
+
+	\newpage
+	\vfill
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle=90, width=0.8\textwidth]{../img/hague.jpg}
+
+		\caption{海牙勝景 漁燈暮紗}
+		\label{fig:hague}
+	\end{figure}
+	\vfill
+
+
+
+	\newpage
+	\begin{flushleft}
+		\section{青玉案 憶廣州}
+	\end{flushleft}
+	
+	\vfill
+	\LARGE 三年别夢羊城路\par 恨當日 人匆去 \par 不識君名難有素 \par 六榕鈡磬 琶洲津渡 \par 欲往君行處 \par \vfill
+	是時依約花都赴\par 對君言 衷腸句 \par 晝短情思難盡訴 \par 經年今去 何期再遇 \par 儘付他鄉雨
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\newpage
+	\begin{flushleft}
+		\section{漁歌子}
+	\end{flushleft}
+
+	\vfill
+	\LARGE 葡國景 華賭戲\par  
+	燈肆霓虹無寐\par
+	紙迷金碎勝飛花\par
+	且舞且歌裝醉\par
+	\vspace{1.5cm} % 調節中央對齊
+	\vfill
+
+	\newpage
+	\vfill
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle=90, width=0.8\textwidth]{../img/aomen.png}
+		\caption{澳門市肆}
+		\label{fig:aomen}
+	\end{figure}
+	\vfill
+
+	\vfill
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle=90, width=0.8\textwidth]{../img/aomen-2.png}
+		\caption{聖保祿堂望瓊樓}
+		\label{fig:aomen2}
+	\end{figure}
+	\vfill
 
 	\end{center}
 

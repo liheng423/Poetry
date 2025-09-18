@@ -1,0 +1,86 @@
+% !TEX encoding = UTF-8
+% !TEX program = lualatex
+
+\documentclass[a4j,12pt]{ltjtarticle}
+\usepackage[paperwidth=20cm, paperheight=15cm, margin=2cm]{geometry} 
+\usepackage{luatexja-fontspec}
+\usepackage{tocloft}
+\usepackage{graphicx}
+
+\setcounter{secnumdepth}{-1}
+
+\setmainjfont[BoldFont=KaiTi]{KaiTi}
+
+\usepackage{hyperref}
+
+\renewcommand\thefootnote{}
+
+
+%%%%%%%%%%%%%% 目錄 %%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand{\numberline}[1]{} % 移除目录中的编号
+\makeatother
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}% 为 section 添加点点
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%% 修改字體 %%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+
+% 修改 section 標題的字體大小
+\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
+\usepackage{titletoc}
+\titlecontents{section}
+[0pt]                  % 左邊距
+{\Large}               % 字體設定
+{\thecontentslabel\ }  % 條目格式
+{}                     % 項目內的標題
+{\titlerule*[1pc]{.}\contentspage} % 为 section 添加点点
+
+\titlecontents{subsection}
+[0pt]                  % 左邊距
+{\large}               % 字體設定
+{\thecontentslabel\ }  % 條目格式
+{}                     % 項目內的標題
+{\titlerule*[1pc]{.}\contentspage} % 为 section 添加点点
+
+
+
+\begin{document}
+	
+
+	
+	
+	
+
+	\Huge{野火文集序} 
+		
+	\newpage
+
+    \tableofcontents
+	
+	\newpage
+    %%%%%% 金剛經 %%%%%%%
+    \section{金剛經} 
+
+    \normalsize 金剛經者 禪宗經典之一也 歷代研習者無數 本書依循後秦之羅什之譯本 照之以五家之言 
+
+    以宗教理法視之 佛陀言法誠正善 然極樂世界亦誠修遠也 故退卻其道流 免閑于修行耳
+
+    以哲學理論察之 其言也大有裨益 啓發甚深 糾其明義 亦為處世之學 所以流芳西國 奉爲圭臬 冠之禪學
+    
+    我心中無佛 且無修行 故難踐之 且抒己所感 達己鄙見 
+
+    全經共三十二分 題材廣闊 故唯幾文章 不甚達其所意
+    
+    佛陀之言不可謂深 然以回文曡詞飾之 故難誤句讀 或述之宗教術語 故諱莫如深 望鄙人之文字 披云見日 推之以理 見之以哲
+
+    \subsection{其一 降伏其心}
+    
+    \subsection{其二 無得無說}
+    
+
+\end{document}
