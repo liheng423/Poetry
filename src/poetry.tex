@@ -11,6 +11,7 @@
 \usepackage{zhnumber}
 \usepackage{hyperref} % 放最后
 
+
 \renewcommand{\contentsname}{目錄}  % 想要的标题
 \renewcommand{\figurename}{圖} 
 \renewcommand{\thefigure}{\zhnumber{\arabic{figure}}} 
@@ -48,6 +49,61 @@
 \captionsetup{font=kaiti}
 
 
+
+%格式
+
+% ==== 定義「詩文 + 脚注」宏 ====
+\newcommand{\PoemWithNote}[3]{%
+  \newpage
+  
+
+  % 把整頁排版放進一個獨立的 minipage（含詩文和脚註）
+  \begin{center}
+    \begin{minipage}{0.9\textwidth}
+
+	\begin{flushleft}
+			\section{#1}
+	\end{flushleft}
+
+      \vspace*{\fill}
+      \begin{center}
+        \begin{minipage}[c][0.7\textheight][c]{0.8\textwidth}
+          \centering
+          \LARGE #2
+        \end{minipage}
+      \end{center}
+      \vspace*{\fill}
+
+      % 腳註與正文綁定在同一 minipage 裏
+       % === 判斷 #3 是否為空 ===
+		\if\relax\detokenize{#3}\relax
+		% 如果是空的，什麼都不做
+		\else
+		% 如果不是空的，輸出註釋段
+		\footnotetext{#3}
+		\fi
+    \end{minipage}
+  \end{center}
+}
+
+% ==== 定義「詩集插圖」命令 ====
+\NewDocumentCommand{\PoemFigure}{ O{0} O{0.8\textwidth} m m m }{%
+  % 用法: \PoemFigure[angle][width]{圖片路徑}{標題}{label}
+  % 例如: \PoemFigure[90][0.8\textwidth]{../img/xian-1.jpg}{西京化覺巷大清真寺}{fig:xian1}
+  \newpage
+  \vspace*{\fill}
+  \begin{center}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[angle=#1, width=#2]{#3}
+      \caption{#4}
+      \label{#5}
+    \end{figure}
+  \end{center}
+  \vspace*{\fill}
+}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -56,10 +112,10 @@
 \renewcommand{\thepage}{{\kaiti\zhnumber{\arabic{page}}}}
 \setcounter{page}{1}
 
-	\Huge 野火诗集序 \\
+	\Huge 野火诗集自序 \\
 
 	\Large
-		野火者東洋言訓也野火先生者本嘉州人
+		野火者本嘉州人
 	也及至弱冠遂就成都長宿之處嘗閑起詩
 	興尋寺涉水快意其間後徙蘭國輾轉研\ruby{縣}{\footnotemark}\footnotetext{研縣者、通語呼台夫特也。然自以爲其名甚異、捨義逐音、遂自詡之研縣、取荷語鑽研之意義。}
 	營營恂恂悶悶終日憂光陰迅速欲著文字
@@ -82,120 +138,51 @@
 		
 	\tableofcontents
 	
-	\newpage
-	\begin{center}
 	
-		\begin{flushleft}
-			\section{月歌} 
-		\end{flushleft}
-		
-		
-		
-		\vfill
-		\LARGE 	月圓雲襲月如缺 \par
-		 		雨陣驚荷雨忽歇 \par
-		 		大塊陷人悲喜間 \par
-		 		遣人何得求心滅 \par
-		\vspace{1cm} % 調節中央對齊
-		\vfill
-		
-		\footnotetext{大塊：況陽春召我以煙景、大塊假我以文章。大塊者，自然也。}
-	\newpage
-		\begin{flushleft}
-			\section{空山}
-		\end{flushleft}
-		
-		\vfill
-		\LARGE 	乍寒夜雨濯林空 \par
-				靉靆烟雲聞刹鐘 \par
-				尋路偶逢歸寺叟 \par
-				笑言我復行迷蹤 \par
-		\vspace{0.5cm} % 調節中央對齊
-		\vfill
-		
-		\footnotetext{其言尋寺、不如言尋心。刹鐘或可作參考、然烟雲之中，人之本心難求、恒之者更難求。時自省吾身、歸寺叟或即自己。「迷時師度、悟時自度」或言此意。}
-		
-	\newpage
+  	\PoemWithNote{月歌}{月圓雲襲月如缺\par
+	  雨陣驚荷雨忽歇\par
+	  大塊陷人悲喜間\par
+	  遣人何得求心滅\par}{大塊：況陽春召我以煙景、大塊假我以文章。大塊者，自然也。}
+
+	\PoemWithNote{空山}{乍寒夜雨濯林空\par
+	靉靆烟雲聞刹鐘\par
+	尋路偶逢歸寺叟\par
+	笑言我復行迷蹤\par}{其言尋寺、不如言尋心。刹鐘或可作參考、然烟雲之中，人之本心難求、恒之者更難求。時自省吾身、歸寺叟或即自己。「迷時師度、悟時自度」或言此意。}
+
+	\PoemWithNote{老嫗}{老嫗孤燈下 寒風料峭生 \par
+	忘身布衣薄 影蹣足難行 \par
+	舊樽復瘦碗 纖手纏囊盈\par
+	今夜怎果腹 剩餘糠與粳\par
+	我生無功德 腰纏仰家名\par
+	唯恨力難及 哀息且憐聲\par
+	尋完此街去 燈火髮熒熒\par
+	轉去聲俱寂 子夜已三更\par}{}
+
+
+	\PoemWithNote{不繫舟}{玉鉴纱霧遲\par
+	湖光銀漢逝 \par
+	孤舟何處系 \par
+	且願東風知 \par}{}
 	
-		\begin{flushleft}
-			\section{老嫗} 
-		\end{flushleft}
-		
-		\vfill
-		\LARGE 	老嫗孤燈下、寒風料峭生 \par
-		忘身布衣薄、影蹣足難行 \par
-		舊樽復瘦碗、纖手纏囊盈\par
-		今夜怎果腹、剩餘糠與粳\par
-		我生無功德、腰纏仰家名\par
-		唯恨力難及、哀息且憐聲\par
-		尋完此街去、燈火髮熒熒\par
-		轉去聲俱寂、子夜已三更\par
-		\vspace{1.5cm} % 調節中央對齊
-		\vfill
-		
-		
-	\newpage
+	\PoemWithNote{歸宴中秋月}{夜風料峭岷江邊\par
+	子時月明天\par
+	光影笙歌弦\par 怎教人知\par
+	孤孑皓月圓\par
+	我欲乘風上瓊樓\par
+	殘燈夜半後\par
+	世事大夢方得悟\par 風清雲淡\par
+	同天畫玉壺\par}{}
 	
-		\begin{flushleft}
-			\section{不繫舟} 
-		\end{flushleft}
-		
-		\vfill
-		\LARGE 	玉鉴纱霧遲\par
-		湖光銀漢逝 \par
-		孤舟何處系 \par
-		且願東風知 \par
-		\vspace{1.5cm} % 調節中央對齊
-		\vfill
-	
-	\newpage
-	
-	\begin{flushleft}
-		\section{歸宴中秋月} 
-	\end{flushleft}
-	
-	\vfill
-		\LARGE 	夜風料峭岷江邊\par
-		子時月明天\par
-		光影笙歌弦\par 怎教人知\par
-		孤孑皓月圓\par
-		我欲乘風上瓊樓\par
-		殘燈夜半後\par
-		世事大夢方得悟\par 風清雲淡\par
-		同天畫玉壺\par
-		\vspace{1.5cm} % 調節中央對齊
-	\vfill
-		
-	
-	\newpage
-	
-	\begin{flushleft}
-		\section{世風} 
-	\end{flushleft}
-	
-	\vfill
-	\LARGE 	致君堯舜難任身\par
+	\PoemWithNote{世風}{致君堯舜難任身\par
 	彈冠相比意何存 \par
 	花開花落風清月 \par
-	客來客往亦行人 \par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
+	客來客往亦行人 \par}{}
 	
-	\newpage
+	\PoemWithNote{安順花舞}{飛花落葉殘夏暮\par
+	但見乘風亂紅舞\par
+	流水相携天邊去\par
+	花心不住人心住}{飛花落葉：佛語、謂獨覺乘之人、獨入於林中、見飛花落葉、感知世間無常之理、因而開悟。住：佛語、住相。此詩乃讀「日本文化史」偶憶去年殘夏妙景、當時難以言说、遂作一詩以志。}
 	
-	\begin{flushleft}
-		\section{安順花舞} 
-	\end{flushleft}	
-	
-	
-	\vfill
-	\LARGE 	飛花落葉殘夏暮\par
-	但見乘風亂紅舞 \par
-	流水相携天邊去 \par
-	花心不住人心住 
-	\vfill
-	
-	\footnotetext{飛花落葉：佛語、謂獨覺乘之人、獨入於林中、見飛花落葉、感知世間無常之理、因而開悟。住：佛語、住相。此詩乃讀「日本文化史」偶憶去年殘夏妙景、當時難以言说、遂作一詩以志。}
 	
 	\newpage
 	\vspace{3cm}
@@ -204,57 +191,29 @@
 		\centering
 		\includegraphics[angle=270, width=0.8\textwidth]{../img/anshun.png}
 		\caption{黔東南安順（自攝）}
-		\label{fig:zhenwu}
+		\label{fig:anshun}
 	\end{figure}
 	\vfill
 	
 	\newpage
+
+	\PoemWithNote{竹溪}{竹澗鎖春光\par
+	拂來緑玉觴\par
+	無舟聞翠浪\par
+	墙下搗衣娘\par}{緑玉觴：水上之竹葉如流觴、又似有玉之黄緑混濁之色、稱之綠玉觴。此詩乃自錦城還鄉偶過之、雖已暮春曉夏、然天朗氣清、溪仍似有柔春之景。竹溪者嘉州之溪一也、曩者余日過之、奈何匆匆、無暇著詩歌之。今偶得興、遂作一詩以志鄉景。}
 	
-	\begin{flushleft}
-		\section{竹溪} 
-	\end{flushleft}	
+
+	\PoemWithNote{記夢}{夜半幽人沐月登\par
+	荒樓衰草遍天橫\par
+	望如落葉影飛下\par
+	應斷恨腸卻斷生}{}
 	
-	\vfill
-	\LARGE 	竹澗鎖春光\par
-	拂來緑玉觴 \par
-	無舟聞翠浪 \par
-	墙下搗衣娘 \par
-	\vfill
+	\PoemWithNote{咏真武山}{瓊樓爭秀鬥奇松\par
+	真武歸山忘紫宫\par
+	竹椅閑言茶休盡\par
+	人間亦在此山中}{游真武山而後覺蒼翠陰翳、宛遁入仙境、故作詩歌之。}
 	
-	\footnotetext{緑玉觴：水上之竹葉如流觴、又似有玉之黄緑混濁之色、稱之綠玉觴。此詩乃自錦城還鄉偶過之、雖已暮春曉夏、然天朗氣清、溪仍似有柔春之景。竹溪者嘉州之溪一也、曩者余日過之、奈何匆匆、無暇著詩歌之。今偶得興、遂作一詩以志鄉景。}
-	
-	
-	
-	\newpage
-	
-	\begin{flushleft}
-		\section{記夢} 
-	\end{flushleft}	
-	
-	\vfill
-		\LARGE 夜半幽人沐月登 \par
-		荒樓衰草遍天横 \par
-		望如落葉影飛下 \par
-		應斷恨腸却斷生 
-		\vspace{2cm} % 調節中央對齊
-	\vfill
-	
-	\newpage
-	
-	\begin{flushleft}
-		\section{咏真武山} 
-	\end{flushleft}	
-	
-	
-	\vfill
-		\LARGE 瓊樓争秀鬥奇松 \par
-		真武歸山忘紫宫 \par
-		竹椅閑言茶休盡 \par
-		人間亦在此山中 
-		\vspace{1cm} % 調節中央對齊
-	\vfill
-	
-	\footnotetext{游真武山而後覺蒼翠陰翳、宛遁入仙境、故作詩歌之。}
+
 	
 	\newpage
 	\vspace{3cm}
@@ -267,50 +226,23 @@
 	\end{figure}
 	\vfill
 	\newpage
+
+	\PoemWithNote{别蓉}{錦城何日回 \par
+	辭日粼波暉 \par
+	蓉水休傷别 \par
+	岷江偕我歸}{}
 	
-	\begin{flushleft}
-		\section{别蓉} 
-	\end{flushleft}	
+	\PoemWithNote{如夢令}{新櫻枝展幾旋 \par
+	殘寒紅亂行阡 \par
+	閑獨步花路 \par
+	稀星孤月迷煙 \par
+	無眠  無眠 \par
+	伊人又奏幽弦}{}
 	
-	\vfill
-		\LARGE 錦城何日回 \par
-		辭日粼波暉 \par
-		蓉水休傷别 \par
-		岷江偕我歸
-		\vspace{2cm} % 調節中央對齊
-	\vfill
-	
-	\newpage
-	
-	\begin{flushleft}
-		\section{如夢令} 
-	\end{flushleft}	
-	
-	
-	\vfill
-		\LARGE 新櫻枝展幾旋 \par
-		殘寒紅亂行阡 \par
-		閑獨步花路 \par
-		稀星孤月迷煙 \par
-		無眠  無眠 \par
-		伊人又奏幽弦
-		\vspace{2cm} % 調節中央對齊
-	\vfill
-	
-	
-	\newpage
-	
-	\begin{flushleft}
-		\section{獨吟} 
-	\end{flushleft}	
-	
-	\vfill
-		\LARGE 酒苦今宵盡 \par
-		夢空明日新 \par
-		閑鴉無問暮 \par
-		偷活不知春 
-		\vspace{2cm} % 調節中央對齊
-	\vfill
+	\PoemWithNote{獨吟}{酒苦今宵盡 \par
+	夢空明日新 \par
+	閑鴉無問暮 \par
+	偷活不知春 }{}
 	
 	\newpage
 	\vfill
@@ -321,169 +253,74 @@
 		\label{fig:crow}
 	\end{figure}
 	\vfill
-	\newpage
 	
-	\begin{flushleft}
-		\section{寒秋} 
-	\end{flushleft}	
+
+	\PoemWithNote{寒秋}{殘年霜降幾寒雨 \par
+	鴉雀晚昏啼亂飛 \par
+	秋盡黄花才報信 \par
+	一鄉明月亦希微 }{}
 	
-	\vfill
-		\LARGE 殘年霜降幾寒雨 \par
-		鴉雀晚昏啼亂飛 \par
-		秋盡黄花才報信 \par
-		一鄉明月亦希微 
-		\vspace{2cm} % 調節中央對齊
-	\vfill
-	\newpage
-	
-	\begin{flushleft}
-		\section{一剪梅 耶誕} 
-	\end{flushleft}	
-	
-	
-	\vfill
-	\LARGE 映月黄花散凍灘 \par
+
+	\PoemWithNote{一剪梅 耶誕}{映月黄花散凍灘 \par
 	秋也飄殘  葉也凋殘 \par
 	華燈元彩路清閑 \par
 	燈影未闌  人影先闌 \par
 	吹雪初翻驚孤鸞 \par
 	亦似形單 亦似心單 \par
 	薄村冷夜計春還 \par
-	人宿温寒 我宿孤寒 \par
-	
-	
-	\vspace{2cm} % 調節中央對齊
-	\vfill
-	
-	\footnotetext{如題、耶誕節有感。}
-	
-	\newpage
-	
-	\begin{flushleft}
-		\section{花非花 遙夜} 
-	\end{flushleft}	
-	
-	\vfill
-	\LARGE 風驚簾    雨侵夢\par
+	人宿温寒 我宿孤寒 \par}{}
+
+
+
+	\PoemWithNote{花非花 遙夜}{風驚簾    雨侵夢\par
 	老葉殘    沉潭凍\par
 	天光促促幾多時 \par
-	遥夜長長誰與共 \par
-
-	\vspace{0.5cm} % 調節中央對齊
-	\vfill
+	遥夜長長誰與共 \par}{本詞受少游之如夢令 遙夜沉沉如水之啓發、荷蘭低地常作狂風、故深夜有感而發。}
 	
-	\footnotetext{本詞受少游之如夢令 遙夜沉沉如水之啓發、荷蘭低地常作狂風、故深夜有感而發。}
 	
-	\newpage 
-
-	\begin{flushleft}
-		\section{研縣新寺} 
-	\end{flushleft}	
-
-	\vfill
-	\LARGE 高椽秀塔暗天光\par
+	
+	\PoemWithNote{研縣新寺}{高椽秀塔暗天光\par
 	拱月攢星隽玉章\par
 	笙弄百年悲喜事\par
-	地碑忠骨遺苍凉\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
-	
-	\newpage
+	地碑忠骨遺苍凉\par}{} 
 
-	\begin{flushleft}
-		\section{無題} 
-	\end{flushleft}	
 
-	\vfill
-	\LARGE 挑燈案上聽寒雨\par
+	\PoemWithNote{無題}{挑燈案上聽寒雨\par
 	逸話閑茶送古香\par
 	西海龍王知我興\par
-	贈來夜半一分凉\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
+	贈來夜半一分凉\par}{}
 
-	\newpage
-
-
-	\begin{flushleft}
-		\section{無題} 
-	\end{flushleft}	
-
-
-	\vfill
-	\LARGE 晚安唯兩言\par
+	\PoemWithNote{無題}{晚安唯兩言\par
 	語罷音塵絕\par
 	杳杳暮寒天\par
-	貓生無異別\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
+	貓生無異別\par}{}
 
-	\newpage
-
-	\begin{flushleft}
-		\section{寡貓歌} 
-	\end{flushleft}	
-
-
-	\vfill
-	\LARGE 夕夕寡猫泣\par
+	\PoemWithNote{寡貓歌}{夕夕寡猫泣\par
 	朝朝淚遺痕\par
 	迢迢前路遠\par
-	哽哽復無言\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
+	哽哽復無言\par}{}
 
-	\newpage
-
-	\begin{flushleft}
-		\section{蘭國興廢事} 
-	\end{flushleft}	
-
-	\vfill
-	\LARGE 競彩揚燈臺攤立\par
+	\PoemWithNote{蘭國興廢事}{競彩揚燈臺攤立\par
 	古磬瓊樓人影翕\par
 	臨風持酒暮忘歸\par
 	鐘樂杳鳴催客入\par
 	蘭國興亡多少集\par
 	酒客遊童誰肯拾\par
 	殘牆疏牖屬英名\par
-	足下靈堂何者泣\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
+	足下靈堂何者泣\par}{蘭國者、現名荷蘭、和譯和蘭也。是日研縣趕場、蘭國古城皆中之以廣場、食肆酒家、橫次其側。其間塔刹巍峨、七寶仙境、勝須彌聖山也。信步殿内、或國之忠烈、或顯貴達官、墓碑悉數足下。嘆已為陳跡、遂予作文。}
 
-	\footnotetext{蘭國者、現名荷蘭、和譯和蘭也。是日研縣趕場、蘭國古城皆中之以廣場、食肆酒家、橫次其側。其間塔刹巍峨、七寶仙境、勝須彌聖山也。信步殿内、或國之忠烈、或顯貴達官、墓碑悉數足下。嘆已為陳跡、遂予作文。}
-	\newpage
-	
-	\begin{flushleft}
-		\section{如夢令 憶昔} 
-	\end{flushleft}	
-	
-	\vfill
-	\LARGE 泣笛閨中幾轉\par
+
+	\PoemWithNote{如夢令 憶昔}{泣笛閨中幾轉\par
 	薄暮閑鐘催晚\par
 	仍記與伊游\par 
 	粤水蜀山恨短 \par
 	如幻    如幻\par
-	人易星移誰算\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
+	人易星移誰算\par}{}
 	
-	
-	\newpage
-
-	\begin{flushleft}
-		\section{咏金華天寧寺}
-	\end{flushleft}
-
-	\vfill
-		\LARGE 孤丘深寄萬家間\par
-		寶殿莊嚴倚峭前\par
-		香盡僧離如來去\par
-		寺空空道非空緣\par
-		\vspace{1.5cm} % 調節中央對齊
-	\vfill
-
-	\footnotetext{二十三年訪金華天寧寺、雄踞隴丘、遙面婺水。祥符初成、延祐重修。而今無人問釋、僧去廟空、唯剩明月清風與寶殿。故生荒涼、世事沉浮、故作一首嘆之。}
+	\PoemWithNote{咏金華天寧寺}{金堂黯藹萬樓間\par
+	遗殿崔嵬逼九山\par
+	塵滅香銷真諦現\par
+	非空非有净土還\par}{二十三年訪金華天寧寺、雄踞隴丘、遙面婺水。祥符初成、延祐重修。而今無人問釋、僧去廟空、唯剩明月清風與寶殿。故生荒涼、世事沉浮、故作一首嘆之。}
 	
 	\newpage
 	\vfill
@@ -495,55 +332,27 @@
 	\end{figure}
 	\vfill
 
+	\PoemWithNote{次年聖誕}{胡琴華舞卻冬寒\par
+	陌路游人照膽肝\par
+	美酒千樽豈能斷\par
+	勸君進酒夜未闌\par}{二十四年聖誕、因緣訪燈火會記、尾句未者平仄顛倒、以期更正}
 
-	\begin{flushleft}
-		\section{次年聖誕}
-	\end{flushleft}
 
-	\vfill
-		\LARGE 胡琴華舞卻冬寒\par
-		陌路游人照膽肝\par
-		美酒千樽豈能斷\par
-		勸君進酒夜未闌\par
-		\vspace{1.5cm} % 調節中央對齊
-	\vfill
-
-	\footnotetext{二十四年聖誕、因緣訪燈火會記、尾句未者平仄顛倒、以期更正}
-	\newpage
-	\begin{flushleft}
-		\section{記蜀夏}
-	\end{flushleft}
-	
-	\vfill
-	\LARGE 三更雷雨朝來歇\par
+	\PoemWithNote{記蜀夏}{三更雷雨朝來歇\par
 
 	初曉青天紅日烈\par 
 
 	急雨襲城晏倏晴\par
 
-	幽灯人定河明滅\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
-
-	\footnotetext{二十四年秋、偶憶幼時之蜀地氣象、驀然覺之竟渾然不似他國異鄉、甚殊之、遂以鄉韻偶吟小詩記之。}
+	幽灯人定河明滅\par}{二十四年秋、偶憶幼時之蜀地氣象、驀然覺之竟渾然不似他國異鄉、甚殊之、遂以鄉韻偶吟小詩記之。}
 
 
 
-
-	\newpage
-	\begin{flushleft}
-		\section{望海牙暮煙有感}
-	\end{flushleft}
+	\PoemWithNote{望海牙暮煙有感}{餘曛掩暮煙\par 
+	海晏萬鱗連\par 
+	眛谷欲邀酒\par 
+	來期難問年\par }{二十四年夏、同窗故友邀余以酒、遂往海牙之灘塗。適日薄、誠奇景也。然勝景依舊、酒肆猶沽、故知難再。}
 	
-	\vfill
-	\LARGE 餘曛掩暮煙\par 
-		海晏萬鱗連\par 
-		眛谷欲邀酒\par 
-		來期難問年\par 
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
-
-	\footnotetext{二十四年夏、同窗故友邀余以酒、遂往海牙之灘塗。適日薄、誠奇景也。然勝景依舊、酒肆猶沽、故知難再。}
 
 	\newpage
 	\vfill
@@ -557,31 +366,14 @@
 	\vfill
 
 
-
-	\newpage
-	\begin{flushleft}
-		\section{青玉案 憶廣州}
-	\end{flushleft}
+	\PoemWithNote{青玉案 憶廣州}{三年别夢羊城路\par 恨當日 人匆去 \par 卻負當時緣未顧 \par 六榕鈡磬 琶洲津渡 \par 欲往君行處 \par\par
+	是時依約花都赴\par 對君言 衷腸句 \par 晝短情思難盡訴 \par 經年今去 何期再遇 \par 盡付他鄉雨}{}
 	
-	\vfill
-	\LARGE 三年别夢羊城路\par 恨當日 人匆去 \par 不識君名難有素 \par 六榕鈡磬 琶洲津渡 \par 欲往君行處 \par \vfill
-	是時依約花都赴\par 對君言 衷腸句 \par 晝短情思難盡訴 \par 經年今去 何期再遇 \par 儘付他鄉雨
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
-
-	\newpage
-	\begin{flushleft}
-		\section{漁歌子}
-	\end{flushleft}
-
-	\vfill
-	\LARGE 葡國景 華賭戲\par  
+	\PoemWithNote{漁歌子}{葡國景 華賭戲\par  
 	燈肆霓虹無寐\par
 	紙迷金碎勝飛花\par
-	且舞且歌裝醉\par
-	\vspace{1.5cm} % 調節中央對齊
-	\vfill
-
+	且舞且歌裝醉\par}{}
+	
 	\newpage
 	\vfill
 	\begin{figure}[h!]
@@ -596,13 +388,52 @@
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[angle=90, width=0.8\textwidth]{../img/aomen-2.png}
-		\caption{聖保祿堂望瓊樓}
+		\caption{自聖保祿堂望瓊樓}
 		\label{fig:aomen2}
 	\end{figure}
 	\vfill
+	
+	\PoemWithNote{詠嘉州名勝 其一}{齊雲大佛比嘉巔\par
+	青浪岷濤擊九淵\par
+	烏有離山焉有寺\par
+	漁燈牽月映迷煙\par}{嘉州者、今人稱樂山。烏尤凌雲兩寺倚山臨江、殊嚴險。青者、青衣江也。岷者、岷江也。大佛倚山鎮水、三水匯于大佛足側。烏有、烏尤寺也。離山、離堆也。傳李冰疏水、遂以土石積山、後世稱離堆。}
 
-	\end{center}
 
+
+	\PoemWithNote{西京懷古 其一}{三街車馬不聞道\par
+	一院松風自習清\par
+	塵客流連真淨路\par
+	月門低轉曉宣聲\par}{本詩寫於二十四年、值三訪西京、再臨化覺之際。初、余欲尋其處、故按圖索之、未料巷深如織、竟行行失路。忽遇山門聳然闌珊深巷之間、嘆其僻左、去喧就寂、乃至遊人尋之不得。雖弘回教、漢寺不敵其華。雖居陋市、紫宮不勝其巧。碧樓晶瑩、松苔盘互。青闕煥爛、直屬雲天。忽誦經聲起、循清風入耳、召白僧徐集。至此已三月有餘。舊事雖微、猶動余懷、故作詩記之。}
+
+	\newpage 
+
+	\vfill
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[angle=90, width=0.8\textwidth]{../img/xian-1.jpg}
+		\caption{西京化覺巷大清真寺}
+		\label{fig:xian1}
+	\end{figure}
+	\vfill
+
+
+	\PoemWithNote{詠嘉州名勝 其二}{叮咚井外聽泮水\par
+	闕點山青啼鳥幽\par
+	煙雨時興迷萬景\par
+	何勞遠夢到揚州}{此詩摹嘉州之老霄頂。時十九年、余飲茶休憩於萬景樓下、忽來急雨、賞嘉州雨景於亭內。而今驀然已五歲有餘。蓋此景餘生不復有矣。叮咚井於文廟泮池前、蓋其井內泉水泠泠、故得名。廟即嘉州文廟也、其大成殿蓋康熙遺構。夫子廟後乃老霄頂、有樓於其上稱萬景樓、肇自宣和、范成大謂之西南第一樓也。惜世事變遷、唯嘉慶遺構存矣。(或謂之崇禎遺構)}
+
+	\PoemWithNote{幻生夢死曲}{夭夭桃花雨 灼灼伊人顏\par 伊人隔煙水 我思匿心間\par 朝朝夢翠黛 夕夕思香鬟\par 畫梁鴛鴦繞 羅袖芍藥攀\par
+	
+	
+
+	}{余今日再聽此曲、其曲折反復、幽微難測、恍爾有光怪陸離、驚夢縈魂之感。余戲言曰、此曲盡怪力乱神、惡夢萬相、天籟其可敵乎。}
+
+
+	\PoemWithNote{詠嘉州名勝 其三}{重來難覺歲 自號峨嵋翁\par
+	伏虎楠凌日 普賢梅飲風\par 
+	猿攀危峭上 雁泳海雲中\par
+	舊月冷新色 絕絃餘一空\par
+	}{}
 
 	
 \end{document}
