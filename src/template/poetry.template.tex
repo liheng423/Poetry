@@ -1,0 +1,128 @@
+% !TEX encoding = UTF-8
+% !TEX program = lualatex
+
+\documentclass[a4j,12pt]{ltjtarticle}
+\usepackage[paperwidth=20cm, paperheight=15cm, margin=2cm]{geometry}
+\usepackage{luatexja-fontspec}
+\usepackage{luatexja-ruby}
+\usepackage{graphicx}
+\usepackage{titletoc}
+\usepackage{titlesec}
+\usepackage{zhnumber}
+\usepackage{caption}
+\usepackage{hyperref} % 放最後
+
+% ==================== 可配置區 ====================
+% 請按你的系統字體安裝情況修改
+\newcommand{\PoetryMainFont}{STSONG}
+\newcommand{\PoetryBoldFont}{STZHONGS}
+\newcommand{\PoetryKaiFont}{KaiTi}
+
+\setmainjfont[BoldFont=\PoetryBoldFont]{\PoetryMainFont}
+\newjfontfamily\kaiti{\PoetryKaiFont}
+
+\renewcommand{\contentsname}{目錄}
+\renewcommand{\figurename}{圖}
+\renewcommand{\thefigure}{\zhnumber{\arabic{figure}}}
+\renewcommand{\thefootnote}{\zhnumber{\arabic{footnote}}}
+
+\setcounter{secnumdepth}{-1} % 正文標題不編號
+\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
+
+% 目錄 section 樣式
+\titlecontents{section}
+  [5pt]
+  {\Large}
+  {}
+  {}
+  {\titlerule*[1pc]{}\large\kaiti\contentspage}
+
+% 腳註字體樣式
+\renewcommand{\footnotesize}{\kaiti\small}
+\makeatletter
+\renewcommand{\@makefnmark}{{\kaiti\textsuperscript{\@thefnmark}}}
+\makeatother
+
+% 圖註字體樣式
+\DeclareCaptionFont{kaiti}{\kaiti}
+\captionsetup{font=kaiti}
+
+% ==================== 核心命令 ====================
+% 用法:
+% \PoemWithNote{標題}{詩文內容（每行以 \par 換行）}{註釋，可留空}
+\newcommand{\PoemWithNote}[3]{%
+  \newpage
+  \begin{center}
+    \begin{minipage}{0.9\textwidth}
+      \begin{flushleft}
+        \section{#1}
+      \end{flushleft}
+
+      \vspace*{\fill}
+      \begin{center}
+        \begin{minipage}[c][0.7\textheight][c]{0.8\textwidth}
+          \centering
+          \LARGE #2
+        \end{minipage}
+      \end{center}
+      \vspace*{\fill}
+
+      \if\relax\detokenize{#3}\relax
+      \else
+        \footnotetext{#3}
+      \fi
+    \end{minipage}
+  \end{center}
+}
+
+% 用法:
+% \PoemFigure[旋轉角度][圖片寬度]{圖片路徑}{圖題}{label}
+% 例:
+% \PoemFigure[90][0.8\textwidth]{../img/anshun.png}{山寺夜景}{fig:example}
+\NewDocumentCommand{\PoemFigure}{ O{0} O{0.8\textwidth} m m m }{%
+  \newpage
+  \vspace*{\fill}
+  \begin{center}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[angle=#1, width=#2]{#3}
+      \caption{#4}
+      \label{#5}
+    \end{figure}
+  \end{center}
+  \vspace*{\fill}
+}
+
+\begin{document}
+\pagenumbering{arabic}
+\renewcommand{\thepage}{{\kaiti\zhnumber{\arabic{page}}}}
+\setcounter{page}{1}
+
+% ==================== 示例內容（請替換） ====================
+\Huge 你的詩集標題 \\
+
+\Large
+這裡寫自序。\par
+可用文言或白話，按段落以 \par 斷行。\par
+若需注音，可用 ruby：\ruby{研縣}{yan xian}。
+
+\newpage
+\tableofcontents
+
+\PoemWithNote{詩題示例}{
+春風入夜過江城\par
+細雨敲窗到五更\par
+燈下忽驚年歲晚\par
+一箋心事寫難成\par
+}{可選註釋：可留空，留空時寫成 \{\}。}
+
+\PoemFigure[90][0.8\textwidth]{../img/template.png}{示例插圖標題}{fig:example}
+
+\PoemWithNote{詞牌示例}{
+雲外月，水邊燈\par
+半城煙火半城僧\par
+人間最是難圓處\par
+且把清歡付短笙\par
+}{}
+
+\end{document}
