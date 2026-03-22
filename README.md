@@ -100,6 +100,8 @@ lualatex --interaction=nonstopmode --halt-on-error src/my-poetry.tex
 
 检查图片路径相对 `tex` 文件是否正确，Windows 路径建议统一用 `/`。
 
-## 5. 许可与使用建议
+## 5. 许可证
 
-如需二次发布模板，建议保留本仓库链接并注明你修改了哪些样式项（纸张尺寸、字体、脚注样式等），方便后续维护者追踪。
+本项目采用 [MIT License](./LICENSE)。
+
+你可以自由使用、修改、分发和用于商业场景；分发时请保留原始许可证与版权声明。

@@ -100,6 +100,8 @@ Make sure `\tableofcontents` exists and compile twice.
 
 Check image paths relative to your `.tex` file. On Windows, prefer `/` as path separator.
 
-## 5. Reuse Notes
+## 5. License
 
-If you republish or adapt this template, keep a link to this repository and note your style changes (page size, fonts, footnote style, etc.) for easier maintenance.
+This project is licensed under the [MIT License](./LICENSE).
+
+You may use, modify, distribute, and use it commercially, as long as you keep the original license and copyright notice in redistributions.
