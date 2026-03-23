@@ -17,8 +17,11 @@
 \renewcommand{\thefigure}{\zhnumber{\arabic{figure}}} 
 \renewcommand{\thefootnote}{\zhnumber{\arabic{footnote}}}
 
-\setmainjfont[BoldFont=STZHONGS]{STSONG}
-\newjfontfamily\kaiti{KaiTi}   % Windows 下字体名通常是 “KaiTi”
+\setmainjfont[
+  BoldFont=Heiti TC
+]{STZhongsong}
+
+\newjfontfamily\kaiti{DFKai-SB}
 \setcounter{secnumdepth}{-1} % 让正文不编号（不影响 ToC 分页）
 
 % 正文里的 section 样式
@@ -366,7 +369,7 @@
 	\vfill
 
 
-	\PoemWithNote{青玉案 憶廣州}{三年别夢羊城路\par 恨當日 人匆去 \par 卻負當時緣未顧 \par 六榕鈡磬 琶洲津渡 \par 欲往君行處 \par\par
+	\PoemWithNote{青玉案 憶廣州}{三年别夢羊城路\par 恨當日 人匆去 \par 卻負當時緣未顧 \par 六榕鈡磬 琶洲津渡 \par 欲往君行處 \par\hspace{1cm}\par
 	是時依約花都赴\par 對君言 衷腸句 \par 晝短情思難盡訴 \par 經年今去 何期再遇 \par 盡付他鄉雨}{}
 	
 	\PoemWithNote{漁歌子}{葡國景 華賭戲\par  
@@ -423,6 +426,8 @@
 	何勞遠夢到揚州}{此詩摹嘉州之老霄頂。時十九年、余飲茶休憩於萬景樓下、忽來急雨、賞嘉州雨景於亭內。而今驀然已五歲有餘。蓋此景餘生不復有矣。叮咚井於文廟泮池前、蓋其井內泉水泠泠、故得名。廟即嘉州文廟也、其大成殿蓋康熙遺構。夫子廟後乃老霄頂、有樓於其上稱萬景樓、肇自宣和、范成大謂之西南第一樓也。惜世事變遷、唯嘉慶遺構存矣。(或謂之崇禎遺構)}
 
 	\PoemWithNote{幻生夢死曲}{夭夭桃花雨 灼灼伊人顏\par 伊人隔煙水 我思匿心間\par 朝朝夢翠黛 夕夕思香鬟\par 畫梁鴛鴦繞 羅袖芍藥攀\par
+						    霓裳遮羞面 羽衣捲轻纱\par 琵琶聲俱寂 琴起複胡笳\par 幽舞迷菡萏 輕歌醉蒹葭\par 宴罷沉日暮 心魂重亂麻\par
+							人約黃昏後 我守春夢空\par 阡陌人盡去 杜鵑啼孤風\par 薄倖且難任 寡情蓋無終\par 忽雷癲狂痛 服散遣夢中\par
 	
 	
 
@@ -434,6 +439,17 @@
 	猿攀危峭上 雁泳海雲中\par
 	舊月冷新色 絕絃餘一空\par
 	}{}
+
+	\PoemWithNote{行路難}{
+		太白嘗歌蜀道難\par
+		特辭蜀水向秦川\par
+		危橋落落千梁圮\par
+		堅隧延延萬峭穿\par
+		朝鬱蓉蟬怨溽暑\par
+		晏涼秦雁斷霜天\par
+		半朝易遍長安寺\par
+		今世詎臨秦嶺巔
+	}{太白昔嘆行路難、其難在路爾、而今天塹盡數通途矣。但每顧秦巔、其難在身之命也。}
 
 	
 \end{document}
