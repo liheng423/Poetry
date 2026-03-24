@@ -21,12 +21,12 @@
 - `luatexja`、`luatexja-fontspec`、`luatexja-ruby`
 - 中文字体（至少 1 套宋体 + 楷体）
 
-模板默认字体是：
-- 正文字体：`STSONG`
-- 粗体：`STZHONGS`
-- 楷体：`KaiTi`
+模板现在内置了跨系统字体回退（macOS / Windows），按“存在即使用”的顺序自动选择：
+- 正文字体（宋）：`Songti SC` → `STSong` → `STZhongsong` → `SimSun` → `FandolSong-Regular`
+- 粗体：`PingFang SC` → `Heiti SC` → `SimHei` → `Microsoft YaHei` → `FandolHei-Regular`
+- 楷体：`Kaiti SC` → `STKaiti` → `KaiTi` → `DFKai-SB` → `FandolKai-Regular`
 
-如果你的系统没有这些字体，请在 `src/poetry.template.tex` 的“可配置区”改成你本机字体名。
+如果你希望固定某套字体，可直接修改 `src/font-fallback.tex` 里的候选列表顺序或字体名。
 
 ## 2. 快速开始（给新用户）
 
@@ -85,11 +85,10 @@ lualatex --interaction=nonstopmode --halt-on-error src/my-poetry.tex
 
 ### Q1: 编译报字体不存在
 
-修改模板顶部字体配置：
+模板已自动回退。若仍报错，通常是系统字体不可用或字体名不匹配。请修改 `src/font-fallback.tex`，或直接在文稿里手动指定：
 ```tex
-\newcommand{\PoetryMainFont}{你的宋体字体名}
-\newcommand{\PoetryBoldFont}{你的粗体字体名}
-\newcommand{\PoetryKaiFont}{你的楷体字体名}
+\setmainjfont[BoldFont=你的粗体字体名]{你的宋体字体名}
+\newjfontfamily\kaiti{你的楷体字体名}
 ```
 
 ### Q2: 目录页码不对或目录为空

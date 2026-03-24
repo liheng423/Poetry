@@ -17,11 +17,15 @@
 \renewcommand{\thefigure}{\zhnumber{\arabic{figure}}} 
 \renewcommand{\thefootnote}{\zhnumber{\arabic{footnote}}}
 
-\setmainjfont[
-  BoldFont=Heiti TC
-]{STZhongsong}
-
-\newjfontfamily\kaiti{DFKai-SB}
+\IfFileExists{src/font-fallback.tex}{%
+  \input{src/font-fallback.tex}%
+}{%
+  \IfFileExists{font-fallback.tex}{%
+    \input{font-fallback.tex}%
+  }{%
+    \input{../font-fallback.tex}%
+  }%
+}
 \setcounter{secnumdepth}{-1} % 让正文不编号（不影响 ToC 分页）
 
 % 正文里的 section 样式
@@ -351,9 +355,9 @@
 
 
 
-	\PoemWithNote{望海牙暮煙有感}{餘曛掩暮煙\par 
+	\PoemWithNote{望海牙暮煙有感}{霞曛掩暮煙\par 
 	海晏萬鱗連\par 
-	眛谷欲邀酒\par 
+	餞酒酣餘苦\par 
 	來期難問年\par }{二十四年夏、同窗故友邀余以酒、遂往海牙之灘塗。適日薄、誠奇景也。然勝景依舊、酒肆猶沽、故知難再。}
 	
 

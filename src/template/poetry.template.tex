@@ -14,12 +14,15 @@
 
 % ==================== 可配置區 ====================
 % 請按你的系統字體安裝情況修改
-\newcommand{\PoetryMainFont}{STSONG}
-\newcommand{\PoetryBoldFont}{STZHONGS}
-\newcommand{\PoetryKaiFont}{KaiTi}
-
-\setmainjfont[BoldFont=\PoetryBoldFont]{\PoetryMainFont}
-\newjfontfamily\kaiti{\PoetryKaiFont}
+\IfFileExists{src/font-fallback.tex}{%
+  \input{src/font-fallback.tex}%
+}{%
+  \IfFileExists{font-fallback.tex}{%
+    \input{font-fallback.tex}%
+  }{%
+    \input{../font-fallback.tex}%
+  }%
+}
 
 \renewcommand{\contentsname}{目錄}
 \renewcommand{\figurename}{圖}

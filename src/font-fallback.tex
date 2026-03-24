@@ -1,0 +1,40 @@
+% Shared font fallback config (macOS / Windows / TeX Live)
+\newcommand{\PoetryMainFont}{}
+\newcommand{\PoetryBoldFont}{}
+\newcommand{\PoetryKaiFont}{}
+
+% Main font (Song)
+\IfFontExistsTF{Songti SC}{\renewcommand{\PoetryMainFont}{Songti SC}}{
+  \IfFontExistsTF{STSong}{\renewcommand{\PoetryMainFont}{STSong}}{
+    \IfFontExistsTF{STZhongsong}{\renewcommand{\PoetryMainFont}{STZhongsong}}{
+      \IfFontExistsTF{SimSun}{\renewcommand{\PoetryMainFont}{SimSun}}{
+        \renewcommand{\PoetryMainFont}{FandolSong-Regular}
+      }
+    }
+  }
+}
+
+% Bold font
+\IfFontExistsTF{PingFang SC}{\renewcommand{\PoetryBoldFont}{PingFang SC}}{
+  \IfFontExistsTF{Heiti SC}{\renewcommand{\PoetryBoldFont}{Heiti SC}}{
+    \IfFontExistsTF{SimHei}{\renewcommand{\PoetryBoldFont}{SimHei}}{
+      \IfFontExistsTF{Microsoft YaHei}{\renewcommand{\PoetryBoldFont}{Microsoft YaHei}}{
+        \renewcommand{\PoetryBoldFont}{FandolHei-Regular}
+      }
+    }
+  }
+}
+
+% Kai font (for notes / captions)
+\IfFontExistsTF{Kaiti SC}{\renewcommand{\PoetryKaiFont}{Kaiti SC}}{
+  \IfFontExistsTF{STKaiti}{\renewcommand{\PoetryKaiFont}{STKaiti}}{
+    \IfFontExistsTF{KaiTi}{\renewcommand{\PoetryKaiFont}{KaiTi}}{
+      \IfFontExistsTF{DFKai-SB}{\renewcommand{\PoetryKaiFont}{DFKai-SB}}{
+        \renewcommand{\PoetryKaiFont}{FandolKai-Regular}
+      }
+    }
+  }
+}
+
+\setmainjfont[BoldFont=\PoetryBoldFont]{\PoetryMainFont}
+\newjfontfamily\kaiti{\PoetryKaiFont}
