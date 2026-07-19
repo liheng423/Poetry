@@ -17,6 +17,11 @@
 \renewcommand{\thefigure}{\zhnumber{\arabic{figure}}} 
 \renewcommand{\thefootnote}{\zhnumber{\arabic{footnote}}}
 
+% 圖片資料夾
+\newcommand{\PoemImageFolder}{../img}
+\newif\ifShowFigures
+\ShowFiguresfalse
+
 \IfFileExists{src/font-fallback.tex}{%
   \input{src/font-fallback.tex}%
 }{%
@@ -60,7 +65,10 @@
 %格式
 
 % ==== 定義「詩文 + 脚注」宏 ====
-\newcommand{\PoemWithNote}[3]{%
+% 用法:
+% \PoemWithNote{標題}{詩文}{註釋}
+% \PoemWithNote[\Large]{標題}{詩文}{註釋}
+\newcommand{\PoemWithNote}[4][\LARGE]{%
   \newpage
   
 
@@ -69,25 +77,25 @@
     \begin{minipage}{0.9\textwidth}
 
 	\begin{flushleft}
-			\section{#1}
+			\section{#2}
 	\end{flushleft}
 
       \vspace*{\fill}
       \begin{center}
-        \begin{minipage}[c][0.7\textheight][c]{0.8\textwidth}
+        \begin{minipage}[c][0.73\textheight][c]{0.8\textwidth}
           \centering
-          \LARGE #2
+          #1 #3
         \end{minipage}
       \end{center}
       \vspace*{\fill}
 
       % 腳註與正文綁定在同一 minipage 裏
        % === 判斷 #3 是否為空 ===
-		\if\relax\detokenize{#3}\relax
+		\if\relax\detokenize{#4}\relax
 		% 如果是空的，什麼都不做
 		\else
 		% 如果不是空的，輸出註釋段
-		\footnotetext{#3}
+		\footnotetext{#4}
 		\fi
     \end{minipage}
   \end{center}
@@ -95,19 +103,24 @@
 
 % ==== 定義「詩集插圖」命令 ====
 \NewDocumentCommand{\PoemFigure}{ O{0} O{0.8\textwidth} m m m }{%
-  % 用法: \PoemFigure[angle][width]{圖片路徑}{標題}{label}
-  % 例如: \PoemFigure[90][0.8\textwidth]{../img/xian-1.jpg}{西京化覺巷大清真寺}{fig:xian1}
-  \newpage
-  \vspace*{\fill}
-  \begin{center}
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[angle=#1, width=#2]{#3}
-      \caption{#4}
-      \label{#5}
-    \end{figure}
-  \end{center}
-  \vspace*{\fill}
+  % 用法: \PoemFigure[angle][width]{圖片檔名}{標題}{label}
+  % 例如: \PoemFigure[90][0.8\textwidth]{xian-1.jpg}{西京化覺巷大清真寺}{fig:xian1}
+  \ifShowFigures
+    \if\relax\detokenize{#3}\relax
+    \else
+      \newpage
+      \vspace*{\fill}
+      \begin{center}
+        \begin{figure}[h!]
+          \centering
+          \includegraphics[angle=#1, width=#2]{\PoemImageFolder/#3}
+          \caption{#4}
+          \label{#5}
+        \end{figure}
+      \end{center}
+      \vspace*{\fill}
+    \fi
+  \fi
 }
 
 
@@ -191,18 +204,7 @@
 	花心不住人心住}{飛花落葉：佛語、謂獨覺乘之人、獨入於林中、見飛花落葉、感知世間無常之理、因而開悟。住：佛語、住相。此詩乃讀「日本文化史」偶憶去年殘夏妙景、當時難以言说、遂作一詩以志。}
 	
 	
-	\newpage
-	\vspace{3cm}
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=270, width=0.8\textwidth]{../img/anshun.png}
-		\caption{黔東南安順（自攝）}
-		\label{fig:anshun}
-	\end{figure}
-	\vfill
-	
-	\newpage
+	\PoemFigure[270][0.8\textwidth]{anshun.png}{黔東南安順（自攝）}{fig:anshun}
 
 	\PoemWithNote{竹溪}{竹澗鎖春光\par
 	拂來緑玉觴\par
@@ -222,17 +224,7 @@
 	
 
 	
-	\newpage
-	\vspace{3cm}
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{../img/zhenwumnt.png}
-		\caption{宜賓真武山（自攝）}
-		\label{fig:zhenwu}
-	\end{figure}
-	\vfill
-	\newpage
+	\PoemFigure[90][0.8\textwidth]{zhenwumnt.png}{宜賓真武山（自攝）}{fig:zhenwu}
 
 	\PoemWithNote{别蓉}{錦城何日回 \par
 	辭日粼波暉 \par
@@ -251,15 +243,7 @@
 	閑鴉無問暮 \par
 	偷活不知春 }{}
 	
-	\newpage
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{../img/crow.jpg}
-		\caption{日暮閑鴉(代爾夫特)}
-		\label{fig:crow}
-	\end{figure}
-	\vfill
+	\PoemFigure[90][0.8\textwidth]{crow.jpg}{日暮閑鴉(代爾夫特)}{fig:crow}
 	
 
 	\PoemWithNote{寒秋}{殘年霜降幾寒雨 \par
@@ -329,15 +313,7 @@
 	塵滅香銷真諦現\par
 	非空非有净土還\par}{二十三年訪金華天寧寺、雄踞隴丘、遙面婺水。祥符初成、延祐重修。而今無人問釋、僧去廟空、唯剩明月清風與寶殿。故生荒涼、世事沉浮、故作一首嘆之。}
 	
-	\newpage
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{../img/tianningsi.jpeg}
-		\caption{浙江金華天寧寺}
-		\label{fig:tianningsi}
-	\end{figure}
-	\vfill
+	\PoemFigure[90][0.8\textwidth]{tianningsi.jpeg}{浙江金華天寧寺}{fig:tianningsi}
 
 	\PoemWithNote{次年聖誕}{胡琴華舞卻冬寒\par
 	陌路游人照膽肝\par
@@ -361,16 +337,7 @@
 	來期難問年\par }{二十四年夏、同窗故友邀余以酒、遂往海牙之灘塗。適日薄、誠奇景也。然勝景依舊、酒肆猶沽、故知難再。}
 	
 
-	\newpage
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{../img/hague.jpg}
-
-		\caption{海牙勝景 漁燈暮紗}
-		\label{fig:hague}
-	\end{figure}
-	\vfill
+	\PoemFigure[90][0.8\textwidth]{hague.jpg}{海牙勝景 漁燈暮紗}{fig:hague}
 
 
 	\PoemWithNote{青玉案 憶廣州}{三年别夢羊城路\par 恨當日 人匆去 \par 卻負當時緣未顧 \par 六榕鈡磬 琶洲津渡 \par 欲往君行處 \par\hspace{1cm}\par
@@ -381,24 +348,8 @@
 	紙迷金碎勝飛花\par
 	且舞且歌裝醉\par}{}
 	
-	\newpage
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{../img/aomen.png}
-		\caption{澳門市肆}
-		\label{fig:aomen}
-	\end{figure}
-	\vfill
-
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{../img/aomen-2.png}
-		\caption{自聖保祿堂望瓊樓}
-		\label{fig:aomen2}
-	\end{figure}
-	\vfill
+	\PoemFigure[90][0.8\textwidth]{aomen.png}{澳門市肆}{fig:aomen}
+	\PoemFigure[90][0.8\textwidth]{aomen-2.png}{自聖保祿堂望瓊樓}{fig:aomen2}
 	
 	\PoemWithNote{詠嘉州名勝 其一}{齊雲大佛比嘉巔\par
 	青浪岷濤擊九淵\par
@@ -412,16 +363,7 @@
 	塵客流連真淨路\par
 	月門低轉曉宣聲\par}{本詩寫於二十四年、值三訪西京、再臨化覺之際。初、余欲尋其處、故按圖索之、未料巷深如織、竟行行失路。忽遇山門聳然闌珊深巷之間、嘆其僻左、去喧就寂、乃至遊人尋之不得。雖弘回教、漢寺不敵其華。雖居陋市、紫宮不勝其巧。碧樓晶瑩、松苔盘互。青闕煥爛、直屬雲天。忽誦經聲起、循清風入耳、召白僧徐集。至此已三月有餘。舊事雖微、猶動余懷、故作詩記之。}
 
-	\newpage 
-
-	\vfill
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[angle=90, width=0.8\textwidth]{../img/xian-1.jpg}
-		\caption{西京化覺巷大清真寺}
-		\label{fig:xian1}
-	\end{figure}
-	\vfill
+	\PoemFigure[90][0.8\textwidth]{xian-1.jpg}{西京化覺巷大清真寺}{fig:xian1}
 
 
 	\PoemWithNote{詠嘉州名勝 其二}{叮咚井外聽泮水\par
@@ -455,7 +397,7 @@
 		今世詎臨秦嶺巔
 	}{太白昔嘆行路難、其難在路爾、而今天塹盡數通途矣。但每顧秦巔、其難在身之命也。}
 
-	\PoemWithNote{古調笑 柏林懷古}{
+	\PoemWithNote{古調笑 柏林懷古其一}{
 		荒草 荒草 \par
 		不曉曲終人老\par 
 		昏昏廣陌殘燈\par
@@ -464,4 +406,17 @@
 		新馬不悲舊路\par
 	}{二十五年、臨柏林馬克思大道。嘆高樓擁立、舊觀猶存。料往昔盛況、車水馬龍、歌舞昇平。然今廣陌羅雀、商肆廢弛、人事儘非、故作此詩。}
 	
+
+	\PoemWithNote[\large]{青玉案 柏林懷古其二}{
+		天塔凌雲 紅宮歌舞\par 昇平一弄\par
+		千手胼胝 萬口金鑠\par 南柯封侯夢\par
+		紞如五鼓 錚然一葉 \par 黯黯夢雲驚斷\par
+		夜茫茫 重尋無處\par 覺來小園行遍 \par
+		天塔凌雲 紅宮歌舞 \par 昇平一弄 \par
+		千手胼胝 萬口金鑠 \par 南柯封侯夢 \par
+		紞如五鼓 錚然一葉 \par 黯黯夢雲驚斷 \par
+		夜茫茫 重尋無處 \par 覺來小園行遍 \par
+
+		% 我想寫的是，“當年大家覺得自己是在正確道路上，自己被社會宣傳縮裹挾前進，現在的”民主社會又何嘗不是“
+	}{}
 \end{document}
